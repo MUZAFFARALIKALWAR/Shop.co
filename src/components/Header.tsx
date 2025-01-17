@@ -39,8 +39,11 @@ export default function Header() {
             </div>
             <div className="flex space-x-2 sm:space-x-4">
             <IoIosSearch className="text-xl  lg:hidden" />
-            <Link href={"/cart"}><IoCartOutline className="text-2xl"/></Link>
-   <MdOutlineAccountCircle className="text-2xl"/>
+            <Link href={"/cart"} className="relative">
+            <IoCartOutline className="text-4xl "/>
+              <span className="bg-red-400 w-[20px] h-[20px] rounded-full flex justify-center items-center absolute top-[-5px] right-0">1</span>
+            </Link>
+   <MdOutlineAccountCircle className="text-4xl"/>
             </div>
          
 

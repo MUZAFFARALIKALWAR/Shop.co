@@ -1,3 +1,4 @@
+
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
@@ -111,5 +112,3 @@ const Cart = () => {
 }
 
 export default Cart;
-
-
