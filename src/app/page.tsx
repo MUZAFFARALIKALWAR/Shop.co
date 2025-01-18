@@ -6,6 +6,7 @@ import Dress from "@/components/dress";
 import CustomerCarousel from "@/components/Customer";
 import Products from "./product/page";
 import Top_sell from "./product/sell";
+import Product from "./product/page";
 
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
     <FontShowcase/>
     {/* <NewArivel/>
     <BestSelling/> */}
-    <Products/>
+    <Product/>
     <Top_sell/>
     <Dress/>
     <CustomerCarousel/>

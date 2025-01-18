@@ -1,9 +1,11 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 // Adding key prop in star array
 let star = [
@@ -13,6 +15,7 @@ let star = [
     <FaStar key={4} />,
     <FaStar key={5} />,
 ];
+
 interface Iproducts {
     image: string;
     discountPercent: number;
@@ -23,26 +26,32 @@ interface Iproducts {
     _id: string;
 }
 
+export default function Product() {
+    const [products, setProducts] = useState<Iproducts[]>([]);
 
-export default async function Products() {
-    let products: Iproducts[] = [];
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const fetchedProducts = await client.fetch(
+                    `*[_type == 'products' && category == 'tshirt']{
+                        "image": image.asset->url,
+                        category,
+                        discountPercent,
+                        isNew,
+                        name,
+                        description,
+                        price,
+                        _id
+                    }[0...4]`
+                );
+                setProducts(fetchedProducts);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
 
-    try {
-        products = await client.fetch(
-            `*[_type == 'products' && category == 'tshirt']{
-                "image": image.asset->url,
-                category,
-                discountPercent,
-                isNew,
-                name,
-                description,
-                price,
-                _id
-            }[0...4]`
-        );
-    } catch (error) {
-        console.error("Error fetching products:", error);
-    }
+        fetchProducts();
+    }, []);
 
     return (
         <>
