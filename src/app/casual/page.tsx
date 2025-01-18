@@ -1,10 +1,10 @@
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
 import Top_sell from "../product/sell";
-import Shirt from "@/components/shirt";
 import { AccordionDemo } from "@/components/accordin";
 import { SliderDemo } from "@/components/slider";
 import { CheckboxDemo } from "@/components/checkbox";
 import { Dressstyle } from "@/components/dreesstyle";
+import Shirt from "@/components/shirt";
 export default function Category(){
     return(
         <div className="mt-2 max-w-screen-2xl  mx-auto">

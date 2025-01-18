@@ -1,12 +1,15 @@
 "use client";
+
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Check, Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import CustomerTestimonials from "@/components/AllReviews";
+import Top_sell from "@/components/arrivals";
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
-import T_shirts from "@/components/products";
 
 // Adding key prop in star array
 let star = [
@@ -18,314 +21,201 @@ let star = [
 ];
 
 interface Iproducts {
-  title: string;
-  price: string;
-  id: number;
-  rating?: string;
-  old_price?: string;
-  img_url: string;
-  img1: string;
-  img2: string;
-  img3: string;
+  image: string[];
+  discountPercent: number;
+  isNew: boolean;
+  name: string;
+  description: string;
+  price: number;
+  _id: string;
+  colors: string[];
+  sizes: string[];
 }
 
-let product: Iproducts[] = [
-  {
-    title: "T-SHIRT WITH TAPE DETAILS",
-    id: 1,
-    price: "$120",
-    img_url: "/product1.png",
-    img1: "/detail1.png",
-    img2: "/detail2.png",
-    img3: "/product1.png",
-  },
-  {
-    title: "SKINNY FIT JEANS",
-    id: 2,
-    price: "$120",
-    img_url: "/product2.png",
-    old_price: "$200",
-    img1: "/detail1.png",
-    img2: "/detail2.png",
-    img3: "/product2.png",
-  },
-  {
-    title: "CHECKERED SHIRT",
-    id: 3,
-    price: "$120",
-    img_url: "/product3.png",
-    img1: "/detail1.png",
-    img2: "/detail2.png",
-    img3: "/product3.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 4,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/detail1.png",
-    img2: "/detail2.png",
-    img3: "/product4.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 5,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/imaegs/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell1.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 6,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell2.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 7,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell3.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 8,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell4.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 9,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might1.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 10,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might2.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 11,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might3.png",
-  },
-  
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 12,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might4.png",
-  },
-  
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 13,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell1.png",
-  },
-  
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 14,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/sell2.png",
-  },
-  
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 15,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3:"/images/sell4.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 16,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might1.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 17,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might2.png",
-  },
-  {
-    title: "SLEEVE STRIPED T-SHIRT",
-    id: 18,
-    price: "$120",
-    img_url: "/product4.png",
-    old_price: "$200",
-    img1: "/images/sell1.png",
-    img2: "/detail2.png",
-    img3: "/images/might3.png",
-  },
-  
+export default function SlugPage({ params }: { params: { id: string } }) {
+  const [product, setProduct] = useState<Iproducts | null>(null);
+  const [cartItem, setCartItem] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-];
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const products: Iproducts[] = await client.fetch(
+          `*[_type == 'products']{
+            "image": image.asset->url,
+            category,
+            discountPercent,
+            isNew,
+            name,
+            description,
+            price,
+            _id,
+            colors,
+            sizes  
+          }`
+        );
 
-export default function Pro_Detail() {
-  const params = useParams();
-  const id = params.id; // dynamic id ye se milengii
-  const item = product.find((item) => item.id === Number(id));
-  if (!item) {
-    return <h1>Product not found</h1>;
+        const slug = products.find((item) => item._id === params.id);
+
+        if (!slug) {
+          setError(true);
+        } else {
+          setProduct(slug);
+          setCartItem({
+            id: slug._id,
+            title: slug.name,
+            image: slug.image[0],
+            price: slug.price,
+            size: slug.sizes[0],
+            color: slug.colors[0],
+            qty: 1,
+            discount: slug.discountPercent,
+          });
+        }
+      } catch (err) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [params.id]);
+
+  if (loading) {
+    return <h1 className="text-center mt-28 font-bold">Loading...</h1>;
+  }
+
+  if (error || !product) {
+    return <h1 className="mt-28 text-center font-bold">Product not found</h1>;
   }
 
   return (
-    <div>
-      <BreadcrumbCollapsed />
-      <div className="flex flex-col md:flex-row justify-center  sm:justify-evenly sm:mt-10 p-5  sm:p-0 max-w-screen-2xl  mx-auto">
-        {/* left */}
+    <>
+    <div className="">
+       <BreadcrumbCollapsed/>
+      <div className="flex flex-col md:flex-row justify-center sm:justify-evenly sm:mt-10 p-5 sm:p-0 max-w-screen-2xl mx-auto">
+        {/* Left */}
         <div className="flex sm:flex-col justify-between items-center w-full sm:w-[152px] order-2 sm:order-1">
-          {/* images */}
-          <Image
-            src={item.img1}
-            className="w-[100px] sm:w-full h-[100px] sm:h-[150px]  rounded-[20px]"
-            alt="productdetaile"
-            width={100}
-            height={100}
-          ></Image>
-          <Image
-            src={item.img2}
-            className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3  rounded-[20px]"
-            alt="productdetaile"
-            width={100}
-            height={100}
-          ></Image>
-          <Image
-            src={item.img3}
-            className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
-            alt="productdetaile"
-            width={100}
-            height={100}
-          ></Image>
+          {product.image &&
+            <Image
+              key={product._id}
+              src={urlFor(product.image).url()}
+              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              alt={product.name}
+              width={100}
+              height={100}
+            />
+          }
+          {product.image &&
+            <Image
+              key={product._id}
+              src={urlFor(product.image).url()}
+              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              alt={product.name}
+              width={100}
+              height={100}
+            />
+          }
+          {product.image &&
+            <Image
+              key={product._id}
+              src={urlFor(product.image).url()}
+              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              alt={product.name}
+              width={100}
+              height={100}
+            />
+          }
         </div>
-        {/* mid div */}
+        {/* Mid */}
         <div className="w-full sm:w-[444px] h-[260px] sm:h-[500px] mt-5 sm:mt-0 order-1 sm:order-2">
-          <Image
-            src={item.img3}
-            alt="productdetaile"
-            className="w-full h-[95%] rounded-[20px]"
-            width={100}
-            height={100}
-          ></Image>
+        {product.image &&
+            <Image
+              key={product._id}
+              src={urlFor(product.image).url()}
+              className=" w-full h-full sm:mt-3 rounded-[20px]"
+              alt={product.name}
+              width={100}
+              height={100}
+            />
+          }
         </div>
-        {/* right div */}
+        {/* Right */}
         <div className="w-full sm:w-[500px] h-[500px] mt-3 order-3">
-          <h1 className="text-2xl md:text-3xl font-bold">One Life Graphic T-shirt</h1>
-          {/* <div className="flex text-yellow-400">{star}</div> */}
-          <div className="flex text-yellow-400">
-                                 {/* Map stars correctly */}
-                                 {star.map((icon, index) => (
-                                   <span key={index}>{icon}</span>
-                                 ))}
-                               </div>
-          <p className="font-bold mt-1">
-            {item.price} <span className="text-gray-500 line-through ml-1">{item.old_price}</span>{" "}
-          </p>
-          <p>
-            This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable
-            fabric, it offers superior comfort and style.
-          </p>
-          {/* select color */}
+          <h1 className="text-2xl md:text-3xl font-bold">{cartItem.title}</h1>
+          <div className="flex text-yellow-400">{star}</div>
+          <div className="flex items-center space-x-2">
+            <p className="font-bold">{cartItem.price * cartItem.qty}</p>
+            {cartItem.discount > 0 && (
+              <span className="text-gray-400 line-through">
+                {(cartItem.price - (cartItem.price * cartItem.discount) / 100) *
+                  cartItem.qty}
+              </span>
+            )}
+            {cartItem.discount > 0 && (
+              <span className="bg-red-400 rounded-[10px]">{`-${cartItem.discount}%`}</span>
+            )}
+          </div>
+          <p className="text-sm">{product.description}</p>
+          {/* Select Color */}
           <div className="mt-5">
             <p className="text-gray-500">Select Colors</p>
             <div className="flex space-x-3 mt-2">
-              <div className="w-[37px] h-[37px] bg-[#4F4631] rounded-full  flex justify-center items-center">
-                <Check className="text-white opacity-0  hover:opacity-100 cursor-pointer" />
-              </div>
-              <div className="w-[37px] h-[37px] bg-[#314F4A] rounded-full flex justify-center items-center">
-                <Check className="text-white opacity-0  hover:opacity-100 cursor-pointer" />
-              </div>
-              <div className="w-[37px] h-[37px] bg-[#31344F] rounded-full flex justify-center items-center">
-                <Check className="text-white opacity-0  hover:opacity-100 cursor-pointer" />
-              </div>
+              {product.colors.map((color, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCartItem({ ...cartItem, color })}
+                  className="w-[37px] h-[37px] border border-black active:outline rounded-full flex justify-center items-center"
+                  style={{ backgroundColor: color }}
+                ></button>
+              ))}
             </div>
           </div>
           {/* Choose Size */}
           <div className="mt-4">
             <p className="text-gray-500">Choose Size</p>
             <div className="flex space-x-3 mt-2">
-              <div className="w-[80px] h-[40px] flex justify-center items-center rounded-[62px] bg-[#F0F0F0] text-gray-400">
-                Small
-              </div>
-              <div className="w-[90px] h-[40px] flex justify-center items-center rounded-[62px] bg-[#F0F0F0] text-gray-400">
-                Medium
-              </div>
-              <div className="w-[80px] h-[40px] flex justify-center items-center rounded-[62px] bg-[#F0F0F0] text-gray-400">
-                Large
-              </div>
-              <div className="w-[90px] h-[40px] flex justify-center items-center rounded-[62px] bg-[#F0F0F0] text-gray-400">
-                X-Large
-              </div>
+              {product.sizes.map((size, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCartItem({ ...cartItem, size })}
+                  className="w-[80px] h-[40px] flex justify-center items-center active:outline rounded-[62px] bg-[#F0F0F0] text-gray-400"
+                >
+                  {size}
+                </button>
+              ))}
             </div>
           </div>
-          {/* BTNS */}
+          {/* Quantity & Add to Cart */}
           <div className="flex justify-start items-center mt-7 space-x-4">
-            <div className="w-[100px] h-[40px] flex justify-between p-3 items-center rounded-[62px] bg-[#F0F0F0] text-gray-400">
+            <button
+              onClick={() =>
+                setCartItem({
+                  ...cartItem,
+                  qty: cartItem.qty <= 1 ? 1 : --cartItem.qty,
+                })
+              }
+            >
               <Minus />
-              1
+            </button>
+            <span>{cartItem.qty}</span>
+            <button
+              onClick={() =>
+                setCartItem({ ...cartItem, qty: ++cartItem.qty })
+              }
+            >
               <Plus />
-            </div>
+            </button>
             <Button className="bg-black text-white w-[300px]">Add to Cart</Button>
           </div>
         </div>
       </div>
-      <CustomerTestimonials />
-      <T_shirts />
     </div>
+      <CustomerTestimonials/>
+      <Top_sell/>
+    </>
   );
 }
