@@ -55,7 +55,7 @@ export default function Product() {
 
     return (
         <>
-            <div className="w-full h-full mt-10 max-w-screen-xl mx-auto">
+            <div className="w-full h-full mt-10 lg:mt-36 max-w-screen-xl mx-auto">
                 <h1 className="text-3xl md:text-4xl font-bold text-center">NEW ARRIVALS</h1>
                 <div className="relative mt-10 overflow-x-auto flex space-x-5 px-8">
                     {products.length > 0 ? (

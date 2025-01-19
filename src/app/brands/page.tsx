@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function Dress(){
     return (
         <main id='brands'>   
-         <div className="w-full  flex justify-center items-center mt-10 mb-1  max-w-screen-2xl mx-auto ">
+         <div className="w-full  flex justify-center items-center mt-20 md:mt-36 mb-1  max-w-screen-2xl mx-auto ">
             {/* container */}
             <div className="w-[90%] md:w-[80%] bg-[#F0F0F0] p-3 md:p-0 rounded-[20px] ">
                 

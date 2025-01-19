@@ -5,14 +5,15 @@ import { SliderDemo } from "@/components/slider";
 import { CheckboxDemo } from "@/components/checkbox";
 import { Dressstyle } from "@/components/dreesstyle";
 import Shirt from "@/components/shirt";
+import Paginationpage from "@/components/pagination";
 export default function Category(){
     return(
-        <div className="mt-2 max-w-screen-2xl  mx-auto">
+        <div className="mt-20 md:mt-28 lg:mt-32 max-w-screen-2xl p-5 mx-auto">
             <BreadcrumbCollapsed/>
             {/* start */}
-            <div className="flex flex-col md:flex-row justify-center items-center space-x-4 mt-5">
+            <div className="flex flex-col items-center md:flex-row justify-center md:items-start md:space-x-4 mt-5">
                 {/* left */}
-                <div className="w-[90%] h-full md:w-[295px] md:h-[1220px] rounded-[20px] border">
+                <div className="w-full h-full md:w-[295px] lg:h-[1220px] rounded-[20px] border">
                    {/* Filters */}
                    <div>
                         <AccordionDemo/>
@@ -46,12 +47,14 @@ export default function Category(){
                    </div>
                 </div >
                 {/* right */}
-                <div className="w-full md:w-[900px] h-full md:h-[1220px] mt-3 md:mt-0 border-b ">
+                <div className="w-full md:w-[900px] h-full lg:h-[1220px] mt-3 md:mt-0 border-b ">
                      <Shirt/>
                     
                 </div>
                 {/* right complete */}
+               
             </div>
+            <Paginationpage/>
         </div>
     )
 }

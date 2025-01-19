@@ -75,16 +75,16 @@ export default function Shirt() {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full ">
       <h1 className="text-[25px] font-bold relative pl-5">
         Casual
         <span className="text-sm font-bold flex items-center justify-center absolute right-10 top-2">
           Most Popular <RiArrowDropDownLine />
         </span>
       </h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 p-2 md:p-0 md:place-items-center">
+      <div className="grid gap-3 grid-cols-2 xl:grid-cols-3  md:p-0 place-items-center">
         {products.map((data, index) => (
-          <div className="mb-6 mt-1" key={index}>
+          <div className=" mt-1" key={index}>
             <Link href={`/product/${data._id}`}>
               <div className="w-[160px] md:w-[240px] lg:w-[290px] h-[160px] md:h-[240px] lg:h-[290px] bg-[#F0EEED] rounded-[20px]">
                 <Image

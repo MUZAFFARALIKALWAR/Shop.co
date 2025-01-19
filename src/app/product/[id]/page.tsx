@@ -1,8 +1,6 @@
 "use client";
-
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
@@ -10,6 +8,8 @@ import { urlFor } from "@/sanity/lib/image";
 import CustomerTestimonials from "@/components/AllReviews";
 import Top_sell from "@/components/arrivals";
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
+import { useDispatch } from "react-redux";
+import Toastify from "@/app/cart/toastify";
 
 // Adding key prop in star array
 let star = [
@@ -37,7 +37,7 @@ export default function SlugPage({ params }: { params: { id: string } }) {
   const [cartItem, setCartItem] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
+   const disispatch = useDispatch()
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -65,8 +65,8 @@ export default function SlugPage({ params }: { params: { id: string } }) {
           setProduct(slug);
           setCartItem({
             id: slug._id,
-            title: slug.name,
-            image: slug.image[0],
+            name: slug.name,
+            image: slug.image,
             price: slug.price,
             size: slug.sizes[0],
             color: slug.colors[0],
@@ -83,7 +83,8 @@ export default function SlugPage({ params }: { params: { id: string } }) {
 
     fetchProduct();
   }, [params.id]);
-
+                 
+ 
   if (loading) {
     return <h1 className="text-center mt-28 font-bold">Loading...</h1>;
   }
@@ -92,18 +93,19 @@ export default function SlugPage({ params }: { params: { id: string } }) {
     return <h1 className="mt-28 text-center font-bold">Product not found</h1>;
   }
 
+       
   return (
     <>
-    <div className="">
+    <div className="mt-28 md:mt-36">
        <BreadcrumbCollapsed/>
-      <div className="flex flex-col md:flex-row justify-center sm:justify-evenly sm:mt-10 p-5 sm:p-0 max-w-screen-2xl mx-auto">
+      <div className="flex h-full items-center flex-col md:flex-row justify-center sm:justify-evenly  sm:p-0 max-w-screen-2xl mx-auto">
         {/* Left */}
-        <div className="flex sm:flex-col justify-between items-center w-full sm:w-[152px] order-2 sm:order-1">
+        <div className="flex space-x-4 md:space-x-0  md:space-y-3 p-5 md:flex-col justify-between items-center md:w-[200px]  order-2 md:order-1">
           {product.image &&
             <Image
               key={product._id}
               src={urlFor(product.image).url()}
-              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              className="w-[100px]  h-[100px] md:h-[150px] lg:mt-3 rounded-[20px]"
               alt={product.name}
               width={100}
               height={100}
@@ -113,7 +115,7 @@ export default function SlugPage({ params }: { params: { id: string } }) {
             <Image
               key={product._id}
               src={urlFor(product.image).url()}
-              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              className="w-[100px]  h-[100px] md:h-[150px] lg:mt-3 rounded-[20px]"
               alt={product.name}
               width={100}
               height={100}
@@ -123,7 +125,7 @@ export default function SlugPage({ params }: { params: { id: string } }) {
             <Image
               key={product._id}
               src={urlFor(product.image).url()}
-              className="w-[100px] sm:w-full h-[100px] sm:h-[150px] sm:mt-3 rounded-[20px]"
+              className="w-[100px]  h-[100px] md:h-[150px] lg:mt-3 rounded-[20px]"
               alt={product.name}
               width={100}
               height={100}
@@ -131,7 +133,7 @@ export default function SlugPage({ params }: { params: { id: string } }) {
           }
         </div>
         {/* Mid */}
-        <div className="w-full sm:w-[444px] h-[260px] sm:h-[500px] mt-5 sm:mt-0 order-1 sm:order-2">
+        <div className="w-[90%] pb-3  h-[260px] lg:w-[500px] md:h-[500px] mt-5 lg:mt-0 order-1 md::order-2">
         {product.image &&
             <Image
               key={product._id}
@@ -144,8 +146,8 @@ export default function SlugPage({ params }: { params: { id: string } }) {
           }
         </div>
         {/* Right */}
-        <div className="w-full sm:w-[500px] h-[500px] mt-3 order-3">
-          <h1 className="text-2xl md:text-3xl font-bold">{cartItem.title}</h1>
+        <div className="w-full p-5 lg:w-[500px] lg:h-[500px]  order-3">
+          <h1 className="text-2xl lg:text-3xl font-bold">{cartItem.name}</h1>
           <div className="flex text-yellow-400">{star}</div>
           <div className="flex items-center space-x-2">
             <p className="font-bold">{cartItem.price * cartItem.qty}</p>
@@ -209,7 +211,8 @@ export default function SlugPage({ params }: { params: { id: string } }) {
             >
               <Plus />
             </button>
-            <Button className="bg-black text-white w-[300px]">Add to Cart</Button>
+            {/* <Button onClick={()=>handleadd(cartItem)} className="bg-black text-white w-[300px]">Add to Cart</Button> */}
+            <Toastify cartItem = {cartItem}/>
           </div>
         </div>
       </div>
