@@ -8,6 +8,8 @@ import { SheetSide } from "./Humburgur";
 import { NavigationMenuDemo } from "./navigationMenu";
 import { useSelector } from "react-redux";
 import AnnouncementBar from "./AnnouncementBar";
+import { Input } from "./ui/input";
+import Search from "./search";
 
 export default function Header() {
   const cart =  useSelector((state:any)=>state.cart)
@@ -34,11 +36,11 @@ export default function Header() {
                 </li>
             </ul>
             {/* right */}
-            <div className="ml-14 flex justify-center items-center">
-                <div className="flex justify-start items-center lg:bg-[#F0F0F0] lg:w-[500px] h-[40px] pl-2 ml-12 md:ml-0 hover:border-none rounded-full "> <IoIosSearch className="text-xl hidden lg:block" /> <input   placeholder={`Search for products...`}  className="bg-[#F0F0F0] outline-none  w-full h-full rounded-full ml-2 hidden lg:block"/></div>
-            </div>
-            <div className="flex space-x-2 sm:space-x-4">
-            {/* <IoIosSearch className="text-xl  lg:hidden" /> */}
+            {/* <Search/> */}
+             <div className="flex justify-start items-center lg:bg-[#F0F0F0] lg:w-[500px] h-[40px] pl-2 ml-12 md:ml-0 hover:border-none rounded-full "> <IoIosSearch className="text-xl " /> <input   placeholder={`Search for products...`}  className="bg-[#F0F0F0] outline-none  w-full h-full rounded-full ml-2  "/></div>
+
+            <div className="flex space-x-2 sm:space-x-4 items-center">
+            {/* <IoIosSearch className="text-4xl  lg:hidden" /> */}
             <Link href={"/cart"} className="relative">
             <IoCartOutline className="text-4xl "/>
             {cart.length > 0 && (
@@ -46,7 +48,7 @@ export default function Header() {
              )
 
              }            </Link>
-   <MdOutlineAccountCircle className="text-4xl"/>
+            <MdOutlineAccountCircle className="text-4xl"/>
             </div>
          
          {/* </div> */}

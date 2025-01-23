@@ -6,8 +6,10 @@ import { MdDelete } from "react-icons/md";
 import Cartpage from "./cartpage";
 import { useSelector } from "react-redux";
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
+import Link from "next/link";
 
 const Page = () => {
+ 
   interface CartItem {
     price: number;
     discount: number;
@@ -25,7 +27,7 @@ const Page = () => {
 
   return (
        <>
-       <div className=" max-w-screen-2xl   mx-auto  mt-36">
+       <div className=" max-w-screen-2xl   mx-auto mt-28 lg:mt-36">
          <BreadcrumbCollapsed/>
     <div className="flex flex-col justify-center items-center relative"> 
         
@@ -60,9 +62,14 @@ const Page = () => {
                                 <Button className="w-[100px] rounded-[20px]">Apply</Button>
                                </div>
                              </div>
-                             <button className="w-full mt-4 bg-black text-white py-2 rounded-md">
-                               Go to Checkout
-                             </button>
+                              {
+                                cartArray.length > 0 && 
+                                <Link href={"/checkout"}>
+                                <button  className="w-full mt-4 bg-black text-white py-2 rounded-md">
+                                   Go to Checkout
+                                 </button>
+                                </Link>  
+                              }
                          </div>
           </div>
           </div>

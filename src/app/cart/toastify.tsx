@@ -31,7 +31,7 @@ const handleadd = (cartItem:any)=>{
   return (
     <>
     <div  onClick={()=>handleadd(cartItem)}>
-         <Button  onClick={notify} className="bg-black text-white w-[300px]"
+         <Button  onClick={notify} className="bg-black text-white lg:w-[300px]"
            >Add to Cart</Button>
     </div>
      <ToastContainer

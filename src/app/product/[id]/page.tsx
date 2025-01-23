@@ -86,11 +86,13 @@ export default function SlugPage({ params }: { params: { id: string } }) {
                  
  
   if (loading) {
-    return <h1 className="text-center mt-28 font-bold">Loading...</h1>;
+    return <h1 className="text-center mt-36 font-bold">Loading...</h1>;
   }
 
   if (error || !product) {
-    return <h1 className="mt-28 text-center font-bold">Product not found</h1>;
+    return <div className="mt-36 text-red-500 text-center font-bold">
+       <BreadcrumbCollapsed/>
+      Product not found</div>;
   }
 
        
