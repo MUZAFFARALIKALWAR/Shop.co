@@ -8,8 +8,6 @@ import { SheetSide } from "./Humburgur";
 import { NavigationMenuDemo } from "./navigationMenu";
 import { useSelector } from "react-redux";
 import AnnouncementBar from "./AnnouncementBar";
-import { Input } from "./ui/input";
-import Search from "./search";
 
 export default function Header() {
   const cart =  useSelector((state:any)=>state.cart)
