@@ -27,7 +27,7 @@ export default {
       {
         name: "phoneNumber",
         title: "phoneNumber",
-        type: "number",
+        type: "string",
        
       },
   

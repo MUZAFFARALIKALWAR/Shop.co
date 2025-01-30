@@ -8,6 +8,7 @@ import { SheetSide } from "./Humburgur";
 import { NavigationMenuDemo } from "./navigationMenu";
 import { useSelector } from "react-redux";
 import AnnouncementBar from "./AnnouncementBar";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const cart =  useSelector((state:any)=>state.cart)
@@ -46,7 +47,18 @@ export default function Header() {
              )
 
              }            </Link>
-            <MdOutlineAccountCircle className="text-4xl"/>
+            {/* <MdOutlineAccountCircle className="text-4xl "/> */}
+            <SignedOut>
+            <SignInButton>
+              <h1 className="text-red-500 cursor-pointer">Login/Register</h1>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn >
+            <UserButton />
+          </SignedIn> 
+        
+          
+            
             </div>
          
          {/* </div> */}
