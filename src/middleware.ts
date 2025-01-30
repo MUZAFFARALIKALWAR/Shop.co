@@ -1,5 +1,5 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
-
+// latest  version
 export default clerkMiddleware();
 
 export const config = {
@@ -10,7 +10,7 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 };
-
+ 
 // import { withClerkMiddleware } from "@clerk/nextjs/server";
 // import { NextResponse } from "next/server";
 
