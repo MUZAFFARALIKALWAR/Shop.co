@@ -40,9 +40,9 @@ export function SheetSide() {
                     
                 
                     <Link href={``}><NavigationMenuDemo/></Link>
-                    <Link className="ml-3" href={`#sale`}>On Sale</Link>
-                    <Link className="ml-3" href={"#arival"}>New Arrivals</Link>
-                    <Link className="ml-3" href={"#brands"}>Brands</Link>
+                    <Link className="ml-3" href={`/sell`}>On Sale</Link>
+                    <Link className="ml-3" href={"/product"}>New Arrivals</Link>
+                    <Link className="ml-3" href={"/brands"}>Brands</Link>
 
                 </li>
             </ul>
