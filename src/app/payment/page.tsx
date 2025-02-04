@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { createPaymentIntent } from "./action";
+import { useRouter } from "next/navigation";
 
 // Initialize Stripe with the public key from environment variables
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
@@ -45,6 +46,7 @@ function PaymentForm() {
   const [isProcessing, setIsProcessing] = useState(false); // State to manage loading state while processing
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // State to show error messages
 
+  const router = useRouter()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent page refresh when submitting the form
 
@@ -64,9 +66,9 @@ function PaymentForm() {
     } else {
       // Payment was successful
       setErrorMessage(null);
-      alert("Payment successful!"); // Notify the user
       setIsProcessing(false);
       // You can optionally redirect the user to a success page here
+      router.push('/payment-success');
     }
   };
 
