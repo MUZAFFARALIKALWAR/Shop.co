@@ -8,7 +8,7 @@ import { SheetSide } from "./Humburgur";
 import { NavigationMenuDemo } from "./navigationMenu";
 import { useSelector } from "react-redux";
 import AnnouncementBar from "./AnnouncementBar";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { ClerkLoading, ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const cart =  useSelector((state:any)=>state.cart)
@@ -47,7 +47,7 @@ export default function Header() {
              )
 
              }            </Link>
-            {/* <MdOutlineAccountCircle className="text-4xl "/> */}
+            {/* <MdOutlineAccountCircle className="text-4xl "/>
             <SignedOut>
             <SignInButton mode="modal">
               <h1 className="text-red-500 cursor-pointer">Login/Register</h1>
@@ -55,7 +55,25 @@ export default function Header() {
           </SignedOut >
           <SignedIn >
             <UserButton />
-          </SignedIn> 
+          </SignedIn>  */}
+           {/* Conditional Rendering for Authentication */}
+         <ClerkProvider>
+            <SignedIn>
+              {/* Show UserButton on desktop only */}
+              <div className="hidden md:block mr-5">
+                <UserButton />
+              </div>
+            </SignedIn>
+
+            <SignedOut>
+              {/* Show SignInButton when the user is signed out */}
+              <SignInButton>
+                <button className="hidden md:block px-4 py-2 text-[#23A6F0] rounded hover:bg-[#23A6F0] font-bold hover:text-white transition-all">
+                  Login
+                </button>
+              </SignInButton>
+            </SignedOut>
+            </ClerkProvider>
         
           
             
