@@ -7,7 +7,7 @@ import { createPaymentIntent } from "./action";
 import { useRouter } from "next/navigation";
 
 // Initialize Stripe with the public key from environment variables
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY as string);
 
 export default function CheckoutPage() {
   // State to store the client secret, which is required for processing the payment
