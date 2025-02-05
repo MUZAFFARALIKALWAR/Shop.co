@@ -49,10 +49,10 @@ export default function Header() {
              }            </Link>
             {/* <MdOutlineAccountCircle className="text-4xl "/> */}
             <SignedOut>
-            <SignInButton>
+            <SignInButton mode="modal">
               <h1 className="text-red-500 cursor-pointer">Login/Register</h1>
-            </SignInButton>
-          </SignedOut>
+            </SignInButton >
+          </SignedOut >
           <SignedIn >
             <UserButton />
           </SignedIn> 
