@@ -166,7 +166,7 @@ export default function ReviewForm() {
                   <div className="flex flex-col  items-start ">
                   <div className="flex">
                       {[...Array(5)].map((_, i) => (
-                       <div>
+                       <div  key={i}>
                          <FaStar
                           key={i}
                           className="text-yellow-400"
