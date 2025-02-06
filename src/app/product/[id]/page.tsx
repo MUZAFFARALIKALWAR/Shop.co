@@ -10,6 +10,7 @@ import Top_sell from "@/components/arrivals";
 import { BreadcrumbCollapsed } from "@/components/Breadcrupm";
 import { useDispatch } from "react-redux";
 import Toastify from "@/app/cart/toastify";
+import ReviewForm from "../rivew";
 
 // Adding key prop in star array
 let star = [
@@ -219,7 +220,8 @@ export default function SlugPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     </div>
-      <CustomerTestimonials/>
+      {/* <CustomerTestimonials/> */}
+      <ReviewForm/>
       <Top_sell/>
     </>
   );
