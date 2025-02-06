@@ -8,12 +8,12 @@ export default function PaymentSuccess() {
         <p className="text-lg text-gray-700 mb-6">Your payment has been processed successfully. Thank you for your purchase!</p>
         
         <div className="space-y-9">
-          <Link href="/shop">
+          <Link href="/casual">
             <p className="inline-block mb-2 text-center text-white bg-blue-500 hover:bg-blue-700 px-6 py-2 rounded-lg w-full">
               Continue Shopping
             </p>
           </Link>
-          <Link href="/token-page">
+          <Link href="/genrate-tracking">
             <p className="inline-block text-center text-white bg-gray-500 hover:bg-gray-700 px-6 py-2 rounded-lg w-full">
               Go to Token Page
             </p>
