@@ -31,6 +31,7 @@ export default function Casualpage(){
     
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [Loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<{
     category: string;
     priceRange: [number, number];
@@ -47,29 +48,36 @@ export default function Casualpage(){
    
   // Fetch products from Sanity
   useEffect(() => {
-    async function fetchProducts() {
-      const data = await client.fetch(`
-        *[_type == "products"]{
-          _id, // Include the product ID for linking
-          name,
-          price,
-          description,
-          image {
-            asset -> {
-              url
-            }
-          },
-          discountPercent,
-          new,
-          category,
-          colors,
-          sizes
-        }
-      `);
-      setProducts(data);
-      setFilteredProducts(data);
+    try {
+      setLoading(true)
+       const fetchProducts = async ()=>{
+        const data = await client.fetch(`
+          *[_type == "products"]{
+            _id, // Include the product ID for linking
+            name,
+            price,
+            description,
+            image {
+              asset -> {
+                url
+              }
+            },
+            discountPercent,
+            new,
+            category,
+            colors,
+            sizes
+          }
+        `);
+        setProducts(data);
+        setFilteredProducts(data);
+        setLoading(false)
+      }
+      fetchProducts();
+    } catch (error) {
+      console.log(error);
+      
     }
-    fetchProducts();
   }, []);
 
     // Adding key prop in star array
@@ -138,7 +146,10 @@ export default function Casualpage(){
       }));
     }
   };
-
+  
+  if(Loading){
+    return <div className="font-bold flex justify-center items-center mt-36">Loading...</div>
+  }
 
     return(
         <div className="mt-20 md:mt-28 lg:mt-32 max-w-screen-2xl pt-2   mx-auto">

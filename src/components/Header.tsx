@@ -41,7 +41,7 @@ export default function Header() {
             <div className="flex space-x-2 sm:space-x-4 items-center">
             {/* <IoIosSearch className="text-4xl  lg:hidden" /> */}
             <Link href={"/cart"} className="relative">
-            <IoCartOutline className="text-2xl lg:text-4xl "/>
+            <IoCartOutline className="text-3xl lg:text-4xl "/>
             {cart.length > 0 && (
                 <span className="absolute top-[-5px] bg-red-400  rounded-full text-white w-[20px] h-[20px] flex justify-center items-center p-1 text-sm right-0">{cart.length}</span>
              )

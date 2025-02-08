@@ -23,7 +23,7 @@ interface Iproducts {
     _id: string;
 }
 
-export default function Product() {
+export default function Top_sell() {
     const [products, setProducts] = useState<Iproducts[]>([]);
     const [Loading, setLoading] = useState(true);
 
@@ -57,7 +57,7 @@ export default function Product() {
     }
     return (
         <div className="w-full h-full mt-10 lg:mt-36 max-w-screen-xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-center">TOP SELLING</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-center">You might also like</h1>
             <Carousel className="w-full mt-10">
                 <CarouselContent className="flex gap-5 lg:gap-0 lg:ml-2">
                     {products.length > 0 ? (
